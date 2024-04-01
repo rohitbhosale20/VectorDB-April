@@ -17,6 +17,12 @@ public class ExcelController {
     @Autowired
     private ExcelProcessorService excelProcessorService;
 
+    @GetMapping("/")
+    public String welcome() {
+        return "Welcome AWS";
+    }
+
+    
     public String handleFileUpload(@RequestParam("file") MultipartFile file,
             @RequestParam("outputDirectory") String outputDirectory) {
         try {
@@ -30,7 +36,7 @@ public class ExcelController {
 
     @GetMapping("/download/{fileName}")
     public ResponseEntity<FileSystemResource> downloadFile(@PathVariable String fileName) {
-        String filePath = "C:\\Users\\Dell\\Downloads\\apollo\\" + fileName; // Update with your actual output directory
+        String filePath = "C:\\Users\\Dell\\Downloads\\apollo\\" + fileName; 
         FileSystemResource resource = new FileSystemResource(filePath);
 
         HttpHeaders headers = new HttpHeaders();
@@ -44,7 +50,7 @@ public class ExcelController {
 			        .contentType(MediaType.APPLICATION_OCTET_STREAM)
 			        .body(resource);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+	
 			e.printStackTrace();
 		}
 		return null;
